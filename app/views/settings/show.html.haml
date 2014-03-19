@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Domain:
+  = @setting.domain
+%p
+  %b Name:
+  = @setting.name
+%p
+  %b Login:
+  = @setting.login
+%p
+  %b Footer:
+  = @setting.footer
+%p
+  %b Info:
+  = @setting.info
+%p
+  %b Analytics api:
+  = @setting.analytics_api
+%p
+  %b Facebook:
+  = @setting.facebook
+%p
+  %b Googleplus:
+  = @setting.googleplus
+%p
+  %b Linkedin:
+  = @setting.linkedin
+
+= link_to 'Edit', edit_setting_path(@setting)
+\|
+= link_to 'Back', settings_path

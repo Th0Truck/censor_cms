@@ -1,0 +1,34 @@
+= simple_form_for @page do |f|
+  - if @page.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+      %ul
+        - @page.errors.full_messages.each do |msg|
+          %li= msg
+
+  .row
+    .form-group
+      .col-xs-4
+        = f.input :name, label: 'Navn', as: :string, input_html: {size: 40, class: 'form-control'}
+  - pages = !params[:parent].present? ? Page.first_level : Page.second_level(params[:parent])
+  .row
+    .form-group
+      .col-xs-4
+        = f.input :order, label: 'Rækkefølge', input_html: {value: pages.count + 1, class: 'form-control'}, as: :string
+  - if params[:parent].present?
+    = f.input :page_id, label: false, input_html: {value: params[:parent]}
+  - else
+    .row
+      &nbsp;
+    .row
+      .form-group
+        .col-xs-4
+          = collection_select :page, :page_id, pages, :id, :name, {:prompt=>'Vælg placering'},{class: 'form-control'}
+  .row
+    %hr
+  .row
+  .form-group
+    .col-xs-12
+      .btn-group
+        = submit_tag 'Opret', :class => 'btn btn-primary'
+        = link_to 'Annuller', root_path, class: 'btn btn-default'

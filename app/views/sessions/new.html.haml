@@ -1,0 +1,20 @@
+%h1 Log ind!
+= form_tag sessions_path do
+  .row
+    .form-group
+      .col-xs-4
+        = text_field_tag :email, 'Email', :value => '', :placeholder => 'E-mail', :class => 'form-control'
+  .row
+    &nbsp;
+  .row
+    .form-group
+      .col-xs-4
+        = password_field_tag :password, 'Adgangskode', :class => 'form-control'
+  .row
+    %hr
+  .row
+    .form-group
+      .col-xs-12
+        .btn-group
+          = submit_tag 'Log ind', :class => 'btn btn-primary'
+          = link_to 'Annuller', users_path, class: 'btn btn-default'

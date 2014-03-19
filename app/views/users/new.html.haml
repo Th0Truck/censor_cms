@@ -1,0 +1,28 @@
+%h1 Tilmeld
+= simple_form_for @user do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} forhindrede denne bruger i at blive oprettet:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+  .row
+    .form-group
+      .col-xs-4
+        = f.input :name, label: 'Navn', :input_html => {:class => 'form-control', :size => 40}
+      .col-xs-4
+        = f.input :email, label: 'E-mail', :input_html => {:class => 'form-control'}
+  .row
+    .form-group
+      .col-xs-4
+        = f.input :password, label: 'Password', as: :password, :input_html => {:class => 'form-control'}
+      .col-xs-4
+        = f.input :password_confirmation, label: 'Gentag password', as: :password, :input_html => {:class => 'form-control'}
+  .row
+    .form-group
+      .col-xs-12
+        .btn-group
+          = f.submit 'Save', class: 'btn btn-danger'
+          = link_to 'Annuller', users_path, class: 'btn btn-default'
+
+

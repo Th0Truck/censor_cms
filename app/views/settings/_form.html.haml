@@ -1,0 +1,37 @@
+= form_for @setting do |f|
+  - if @setting.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@setting.errors.count, "error")} prohibited this setting from being saved:"
+      %ul
+        - @setting.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :domain
+    = f.text_field :domain
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :login
+    = f.number_field :login
+  .field
+    = f.label :footer
+    = f.number_field :footer
+  .field
+    = f.label :info
+    = f.text_area :info
+  .field
+    = f.label :analytics_api
+    = f.text_field :analytics_api
+  .field
+    = f.label :facebook
+    = f.text_field :facebook
+  .field
+    = f.label :googleplus
+    = f.text_field :googleplus
+  .field
+    = f.label :linkedin
+    = f.text_field :linkedin
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,35 @@
+%h1 Listing settings
+
+%table
+  %tr
+    %th Domain
+    %th Name
+    %th Login
+    %th Footer
+    %th Info
+    %th Analytics api
+    %th Facebook
+    %th Googleplus
+    %th Linkedin
+    %th
+    %th
+    %th
+
+  - @settings.each do |setting|
+    %tr
+      %td= setting.domain
+      %td= setting.name
+      %td= setting.login
+      %td= setting.footer
+      %td= setting.info
+      %td= setting.analytics_api
+      %td= setting.facebook
+      %td= setting.googleplus
+      %td= setting.linkedin
+      %td= link_to 'Show', setting
+      %td= link_to 'Edit', edit_setting_path(setting)
+      %td= link_to 'Destroy', setting, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Setting', new_setting_path

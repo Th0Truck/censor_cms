@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2921710435">
+    <data-source source="LOCAL" name="Rails censor_cms: development" uuid="db764cd4-4404-4c34-9065-ef5505b317ff">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/censor_cms_development</jdbc-url>
+      <user-name>censor_cms</user-name>
+      <user-password>dfdddfc5dfc7dfcbdfc4dfc7dfcbdfc4</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails censor_cms: test" uuid="09a597e3-5014-4f88-b5c0-78fc5be947b9">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/censor_cms_test</jdbc-url>
+      <user-name>censor_cms</user-name>
+      <user-password>dfdddfc5dfc7dfcbdfc4dfc7dfcbdfc4</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails censor_cms: production" uuid="5129f95d-8626-4aa9-9a75-a3b1b0c6c998">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/censor_cms_production</jdbc-url>
+      <user-name>censor_cms</user-name>
+      <user-password>dfdddfc5dfc7dfcbdfc4dfc7dfcbdfc4</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/Library/Preferences/RubyMine40/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
+
