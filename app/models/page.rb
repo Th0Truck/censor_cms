@@ -3,7 +3,7 @@ class Page < ActiveRecord::Base
   has_many :users, through: :user_pages
   belongs_to :page
   has_many :pages
-
+  has_many :sections
   attr_accessible :name, :order, :page_id
 
   def self.first_level

@@ -1,4 +1,4 @@
-= form_for @setting do |f|
+= simple_form_for @setting do |f|
   - if @setting.errors.any?
     #error_explanation
       %h2= "#{pluralize(@setting.errors.count, "error")} prohibited this setting from being saved:"
@@ -6,32 +6,37 @@
         - @setting.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :domain
-    = f.text_field :domain
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :login
-    = f.number_field :login
-  .field
-    = f.label :footer
-    = f.number_field :footer
-  .field
-    = f.label :info
-    = f.text_area :info
-  .field
-    = f.label :analytics_api
-    = f.text_field :analytics_api
-  .field
-    = f.label :facebook
-    = f.text_field :facebook
-  .field
-    = f.label :googleplus
-    = f.text_field :googleplus
-  .field
-    = f.label :linkedin
-    = f.text_field :linkedin
-  .actions
-    = f.submit 'Save'
+  .row
+    .form-group
+      .col-xs-6
+        = f.input :domain, label: 'Domæne', as: :string, input_html: {size: 40, class: 'form-control'}
+      .col-xs-6
+        = f.input :name, label: 'Navn', as: :string, input_html: {size: 40, class: 'form-control'}
+  .row
+    .form-group
+      .col-xs-6
+        = f.input :login, label: 'Aktivér login', as: :boolean, input_html: {class: 'form-control'}
+      .col-xs-6
+        = f.input :footer, label: 'Aktivér footer', as: :boolean, input_html: {class: 'form-control'}
+  .row
+    .form-group
+      .col-xs-12
+        = f.input :info, label: 'Forside', as: :text, input_html: {size: 40, class: 'form-control'}
+  .row
+    .form-group
+      .col-xs-3
+        = f.input :analytics_api, label: 'Google Analytics API', as: :string, input_html: {size: 40, class: 'form-control'}
+      .col-xs-3
+        = f.input :googleplus, label: 'Google+ API', as: :string, input_html: {size: 40, class: 'form-control'}
+      .col-xs-3
+        = f.input :facebook, label: 'Facebook API', as: :string, input_html: {size: 40, class: 'form-control'}
+      .col-xs-3
+        = f.input :linkedin, label: 'LinkedIn API', as: :string, input_html: {size: 40, class: 'form-control'}
+  .row
+    %hr
+  .row
+    .form-group
+      .col-xs-12
+        .btn-group
+          = submit_tag 'Gem', :class => 'btn btn-primary'
+          = link_to 'Annuller', root_path, class: 'btn btn-default'

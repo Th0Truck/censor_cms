@@ -1,3 +1,4 @@
+# encoding: utf-8
 class UploadsController < ApplicationController
   before_action :set_upload, only: [:show, :edit, :update, :destroy]
 
@@ -24,11 +25,12 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-    @upload = Upload.new(upload_params)
+
+    @upload = Upload.new(params[:uploads])
 
     respond_to do |format|
       if @upload.save
-        format.html { redirect_to @upload, notice: 'Upload was successfully created.' }
+        format.html { redirect_to @upload, notice: 'Upload Lykkedes.' }
         format.json { render action: 'show', status: :created, location: @upload }
       else
         format.html { render action: 'new' }
@@ -42,7 +44,7 @@ class UploadsController < ApplicationController
   def update
     respond_to do |format|
       if @upload.update(upload_params)
-        format.html { redirect_to @upload, notice: 'Upload was successfully updated.' }
+        format.html { redirect_to @upload, notice: 'Ændringer gemt.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

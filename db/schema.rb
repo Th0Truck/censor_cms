@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319113451) do
+ActiveRecord::Schema.define(version: 20140321075159) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -32,8 +32,10 @@ ActiveRecord::Schema.define(version: 20140319113451) do
     t.text     "article"
     t.integer  "user_id"
     t.integer  "order"
+    t.integer  "page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "upload"
   end
 
   create_table "settings", force: true do |t|
@@ -46,6 +48,14 @@ ActiveRecord::Schema.define(version: 20140319113451) do
     t.string   "facebook"
     t.string   "googleplus"
     t.string   "linkedin"
+    t.integer  "homepage",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "upload_sections", force: true do |t|
+    t.integer  "section_id"
+    t.integer  "upload_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

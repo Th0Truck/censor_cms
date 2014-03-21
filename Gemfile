@@ -46,6 +46,11 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', :require => "bcrypt"
 
+#uploads
+gem 'carrierwave'
+gem 'rmagick'
+gem 'mini_magick'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

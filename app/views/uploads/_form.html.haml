@@ -1,22 +1,79 @@
-= form_for @upload do |f|
-  - if @upload.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@upload.errors.count, "error")} prohibited this upload from being saved:"
-      %ul
-        - @upload.errors.full_messages.each do |msg|
-          %li= msg
+#drop-area
+  .col-xs12.drop-instructions{:id => 'dropzone-info'}
+    = "Træk dine filer herind..."
+  .col-xs12.dropbox.well{:id => 'dropzone'}
+    = "... og drop dem her!"
+    %br
+      Dog max 15 billeder.
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :size
-    = f.number_field :size
-  .field
-    = f.label :type
-    = f.text_field :type
-  .actions
-    = f.submit 'Save'
+.spacer.medium
+
+.row
+  #uploader
+    = @notice
+.spacer.medium
+
+.row
+  #uploaded
+
+:javascript
+
+      function showUploading(file) {
+        $("#uploaded").append('<div class="col-xs-3"><div class="alert alert-info"><h5>'+file+' <small>(uploadet)</small></h5></div></div>');
+      }
+
+      function GetGallery()
+      {
+        $('#gallerydiv').load("/uploads/");
+      }
+
+      $(document).bind('dragover', function (e) {
+          e.preventDefault();
+        })
+        .bind('drop', function (e) {
+          e.preventDefault();
+          e.dataTransfer = e.originalEvent.dataTransfer;
+          var files = e.dataTransfer.files,
+          i = 0;
+
+          numFiles = files.length;
+
+          for (i = 0; i < numFiles; i++) {
+            //uploadFile(files.item(i), i);
+            if ( window.FileReader ) {
+                reader = new FileReader();
+                reader.onloadend = function (e) {
+                    //showUploading(files.item(i).name);
+                };
+                reader.readAsDataURL(files.item(i));
+            }
+            if (window.FormData) {
+                formdata = new FormData();
+            }
+            if (formdata) {
+                formdata.append("uploads[file]", files.item(i));
+                formdata.append("uploads[title]", files.item(i).name);
+                formdata.append("uploads[size]", files.item(i).size);
+                formdata.append("uploads[filetype]", files.item(i).type);
+            }
+            url = '/saveupload';
+            if ((files.item(i).type == 'image/jpeg') || (files.item(i).type == 'image/jpg') || (files.item(i).type == 'image/png') || (files.item(i).type == 'image/gif'))
+            {
+              url = '/saveimage';
+            }
+            if (formdata) {
+              var theUploader = $.ajax({
+                url: url,
+                type: "POST",
+                name: 'uploads',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: showUploading(files.item(i).name)
+              });
+
+            }
+
+          }
+
+        });

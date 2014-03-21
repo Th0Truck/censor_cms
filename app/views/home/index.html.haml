@@ -1,4 +1,11 @@
 %h1
   Velkommen til
   = @setting.name
+%section
+  %article
+    = raw @setting.info
 
+- if current_user.admin?
+  .row
+    .col-xs-4
+      = link_to 'Redigér', edit_setting_path(1), class: 'btn btn-primary'

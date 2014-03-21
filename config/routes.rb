@@ -1,13 +1,28 @@
 CensorCms::Application.routes.draw do
 
+  resources :images do
+    member do
+      post 'saveimage' => :create
+      get 'saveimage' => :create
+    end
+  end
+
+  resources :upload_sections
+
   get "home/index"
+
   resources :settings
 
   resources :user_accounts
 
   resources :accounts
 
-  resources :uploads
+  resources :uploads do
+    member do
+      post 'saveupload' => :create
+      get 'saveupload' => :create
+    end
+  end
 
   resources :user_sections
 
@@ -35,6 +50,8 @@ CensorCms::Application.routes.draw do
   match "log_out" => "sessions#destroy", :as => "log_out", via: [:get, :post]
   match "log_in" => "sessions#new", :as => "log_in", via: [:get, :post]
   match "sign_up" => "users#new", :as => "sign_up", via: [:get, :post]
+  match "saveupload" => "uploads#create", :as => "saveupload", via: [:get, :post]
+  match "saveimage" => "images#create", :as => "saveimage", via: [:get, :post]
   #root :to => "users#new"
 
 
