@@ -1,0 +1,10 @@
+%article.col-md-12
+  - if section.images.present?
+    - section.images.each do |image|
+      .img-rounded= image_tag image.file_url(:medium)
+  = section.article
+- if current_user.admin?
+  .col-md-12
+    .btn-group
+      = link_to 'Redigér', edit_section_path(section), class: 'btn btn-primary'
+      = link_to 'Nyt afsnit', new_section_path(:page_id => @page.id), class: 'btn btn-default'

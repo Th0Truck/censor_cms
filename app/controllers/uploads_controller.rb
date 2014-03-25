@@ -25,11 +25,12 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
+    section_id = params[:places][:section_id]
 
     @upload = Upload.new(params[:uploads])
-
     respond_to do |format|
       if @upload.save
+        @upload_section = UploadSection.create!(section_id: section_id, upload_id: @upload.id)
         format.html { redirect_to @upload, notice: 'Upload Lykkedes.' }
         format.json { render action: 'show', status: :created, location: @upload }
       else

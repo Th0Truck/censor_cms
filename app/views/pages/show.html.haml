@@ -1,12 +1,7 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @page.name
-%p
-  %b Order:
-  = @page.order
-
-= link_to 'Edit', edit_page_path(@page)
-\|
-= link_to 'Back', pages_path
+- @page.sections.each do |section|
+  = render 'sections/section'
+- if current_user.admin?
+  .col-md-12
+    .btn-group
+      = link_to 'Redigér', edit_page_path(@page), class: 'btn btn-primary'
+      = link_to 'Nyt afsnit', new_section_path(:page_id => @page.id), class: 'btn btn-default' if !@page.sections.present?

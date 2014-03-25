@@ -5,10 +5,13 @@ class ImagesController < ApplicationController
   end
 
   def create
+    section_id = params[:places][:section_id]
+
     @upload = Image.new(params[:uploads])
 
     respond_to do |format|
       if @upload.save
+        @upload_section = UploadSection.create!(section_id: section_id, upload_id: @upload.id)
         format.html { redirect_to upload_path(@upload), notice: 'Upload Lykkedes.' }
         format.json { render action: 'show', status: :created, location: @upload }
       else

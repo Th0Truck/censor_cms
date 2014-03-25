@@ -1,7 +1,7 @@
 #drop-area
-  .col-xs12.drop-instructions{:id => 'dropzone-info'}
+  .col-xs-12.drop-instructions{:id => 'dropzone-info'}
     = "Træk dine filer herind..."
-  .col-xs12.dropbox.well{:id => 'dropzone'}
+  .col-xs-12.dropbox.well{:id => 'dropzone'}
     = "... og drop dem her!"
     %br
       Dog max 15 billeder.
@@ -13,13 +13,10 @@
     = @notice
 .spacer.medium
 
-.row
-  #uploaded
-
 :javascript
 
       function showUploading(file) {
-        $("#uploaded").append('<div class="col-xs-3"><div class="alert alert-info"><h5>'+file+' <small>(uploadet)</small></h5></div></div>');
+        $("#uploaded").append('<div class="col-xs-3"><div class="alert alert-info"><h5>'+file+' <small>(uploadet)</small><input type="hidden" name="section[files][]" value="" /></h5></div></div>');
       }
 
       function GetGallery()
@@ -55,6 +52,8 @@
                 formdata.append("uploads[title]", files.item(i).name);
                 formdata.append("uploads[size]", files.item(i).size);
                 formdata.append("uploads[filetype]", files.item(i).type);
+                if ($('#section_id'))
+                {formdata.append("places[section_id]", $('#section_id').val());}
             }
             url = '/saveupload';
             if ((files.item(i).type == 'image/jpeg') || (files.item(i).type == 'image/jpg') || (files.item(i).type == 'image/png') || (files.item(i).type == 'image/gif'))

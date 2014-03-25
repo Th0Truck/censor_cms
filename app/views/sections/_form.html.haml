@@ -1,4 +1,4 @@
-= form_for @section do |f|
+= simple_form_for @section do |f|
   - if @section.errors.any?
     #error_explanation
       %h2= "#{pluralize(@section.errors.count, "error")} prohibited this section from being saved:"
@@ -6,17 +6,34 @@
         - @section.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :header
-    = f.text_field :header
-  .field
-    = f.label :article
-    = f.text_area :article
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :order
-    = f.number_field :order
-  .actions
-    = f.submit 'Save'
+  .row
+    .form-group
+      .col-md-4
+        = f.input :header, label: 'Overskrift', as: :string, input_html: {size: 40, class: 'form-control'}
+  .row
+    .form-group
+      .col-md-4
+        = f.input :article, label: 'Afsnit', as: :text, input_html: {class: 'form-control', rows: 8}
+        = f.input :user_id, as: :hidden, input_html: {value: current_user.id}
+        = f.input :page_id, as: :hidden, input_html: {value: params[:page_id]}
+        = f.input :id, as: :hidden, input_html: {value: params[:id]} if @section.persisted?
+      .col-md-8
+        %label Filer
+        = render 'uploads/form' if @section.persisted?
+  .row
+    %hr
+  .row#uploaded
+    - @section.uploads.each do |upload|
+      .col-xs-3
+        .alert.alert-info
+          %h5
+            = link_to upload.title, upload
+            = link_to upload_path, method: :destroy do
+              %i.fa-trash-o
+  .row
+    %hr
+  .row
+    .form-group
+      .col-xs-4.btn-group
+        = f.submit 'Gem', class: 'btn btn-primary'
+        = link_to 'Tilbage', sections_path, class: 'btn btn-default'
