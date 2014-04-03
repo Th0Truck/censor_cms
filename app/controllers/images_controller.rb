@@ -8,7 +8,6 @@ class ImagesController < ApplicationController
     section_id = params[:places][:section_id]
 
     @upload = Image.new(params[:uploads])
-
     respond_to do |format|
       if @upload.save
         @upload_section = UploadSection.create!(section_id: section_id, upload_id: @upload.id)

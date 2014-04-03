@@ -27,6 +27,7 @@ gem 'jquery-rails'
 #Bootstrap
 gem 'bootstrap-sass','~> 3.1.1'
 gem 'twitter-bootstrap-turbo'
+gem 'font-awesome-sass'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

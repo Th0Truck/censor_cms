@@ -1,5 +1,20 @@
 - @page.sections.each do |section|
-  = render 'sections/section'
+  =# render partial: 'sections/section'
+  %article.col-md-12
+    - if section.images.present?
+      - section.images.is_image.each do |image|
+        .img-rounded= image_tag image.large.url.to_s
+    = section.article
+    .row
+      - if section.uploads.is_doc.present?
+        - section.uploads.each do |file|
+          .col-md-3.alert.alert-info
+            %i.fa-archive= file.title
+  - if current_user.admin?
+    .col-md-12
+      .btn-group
+        = link_to 'Redigér', edit_section_path(section), class: 'btn btn-primary'
+        = link_to 'Nyt afsnit', new_section_path(:page_id => @page.id), class: 'btn btn-default'
 - if current_user.admin?
   .col-md-12
     .btn-group

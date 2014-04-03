@@ -1,3 +1,9 @@
 class Setting < ActiveRecord::Base
-  attr_accessible :domain, :name, :login, :footer, :info, :analytics_api, :facebook, :googleplus, :linkedin
+  attr_accessible :domain, :name, :login, :footer, :info, :analytics_api, :facebook, :googleplus, :linkedin, :homepage
+
+  def self.for_host(host)
+    subdomain = host.split('.').first
+    where('domain like ?', host.split('.')[-2] + '%').first
+
+  end
 end

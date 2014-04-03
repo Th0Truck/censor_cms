@@ -3,6 +3,11 @@
     - section.images.each do |image|
       .img-rounded= image_tag image.file_url(:medium)
   = section.article
+  .row
+    - if section.uploads.present?
+      - section.uploads.each do |file|
+        .col-md-3.alert.alert-info
+          %i.fa-archive= file.title
 - if current_user.admin?
   .col-md-12
     .btn-group
