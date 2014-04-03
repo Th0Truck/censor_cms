@@ -4,6 +4,7 @@ class Page < ActiveRecord::Base
   belongs_to :page
   has_many :pages
   has_many :sections
+  belongs_to :setting
   attr_accessible :name, :order, :page_id
 
   def self.first_level
