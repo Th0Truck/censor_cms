@@ -8,23 +8,25 @@
 
   .row
     .form-group
-      .col-md-4
+      .col-md-8
         = f.input :header, label: 'Overskrift', as: :string, input_html: {size: 40, class: 'form-control'}
   .row
     .form-group
-      .col-md-4
-        = f.input :article, label: 'Afsnit', as: :text, input_html: {class: 'form-control', rows: 8}
-        = f.input :user_id, as: :hidden, input_html: {value: current_user.id}
-        = f.input :page_id, as: :hidden, input_html: {value: params[:page_id]}
-        = f.input :id, as: :hidden, input_html: {value: params[:id]} if @section.persisted?
       .col-md-8
+        = f.input :article, as: :ckeditor, input_html: { ckeditor: { toolbar: 'mini', language: 'da' } }
+        = f.input :user_id, as: :hidden, input_html: { value: current_user.id }
+        = f.input :page_id, as: :hidden, input_html: { value: params[:page_id] }
+        = f.input :id, as: :hidden, input_html: { value: params[:id] } if @section.persisted?
+      .col-md-4
+        %label Sidebar
+        = collection_select :sidebar, :sidebar_id, current_domain.sidebars, :id, :name, { prompt: 'Vælg en sidebar' }, { class: 'form-control' }
         %label Filer
         = render 'uploads/form' if @section.persisted?
   .row
     %hr
   .row#uploaded
     - @section.uploads.each do |upload|
-      .col-xs-3
+      .col-md-3
         .alert.alert-info
           %h5
             = link_to upload.title, upload
@@ -34,6 +36,6 @@
     %hr
   .row
     .form-group
-      .col-xs-4.btn-group
+      .col-md-4.btn-group
         = f.submit 'Gem', class: 'btn btn-primary'
         = link_to 'Tilbage', sections_path, class: 'btn btn-default'

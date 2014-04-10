@@ -24,11 +24,11 @@ class SectionsController < ApplicationController
   # POST /sections
   # POST /sections.json
   def create
-    @section = Section.new(section_params)
+    @section = Section.new(params[:section])
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to @section, notice: 'Section was successfully created.' }
+        format.html { redirect_to @section.page, notice: 'Nyt afsnit oprettet.' }
         format.json { render action: 'show', status: :created, location: @section }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(section_params)
-        format.html { redirect_to @section, notice: 'Section was successfully updated.' }
+        format.html { redirect_to @section.page, notice: 'Afsnittet er blevet opdateret.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

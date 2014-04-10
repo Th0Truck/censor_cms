@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140321075159) do
+ActiveRecord::Schema.define(version: 20140403151923) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -20,9 +20,10 @@ ActiveRecord::Schema.define(version: 20140321075159) do
   end
 
   create_table "pages", force: true do |t|
-    t.integer  "page_id"
     t.string   "name"
     t.integer  "order"
+    t.integer  "page_id"
+    t.integer  "setting_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -36,6 +37,13 @@ ActiveRecord::Schema.define(version: 20140321075159) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "upload"
+  end
+
+  create_table "sections_sidebars", force: true do |t|
+    t.string   "section_id"
+    t.string   "sidebar_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "settings", force: true do |t|
@@ -53,6 +61,14 @@ ActiveRecord::Schema.define(version: 20140321075159) do
     t.datetime "updated_at"
   end
 
+  create_table "sidebars", force: true do |t|
+    t.string   "setting_id"
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "upload_sections", force: true do |t|
     t.integer  "section_id"
     t.integer  "upload_id"
@@ -61,10 +77,10 @@ ActiveRecord::Schema.define(version: 20140321075159) do
   end
 
   create_table "uploads", force: true do |t|
-    t.string   "name"
+    t.string   "file"
     t.string   "title"
     t.integer  "size"
-    t.string   "type"
+    t.string   "filetype"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -99,9 +115,9 @@ ActiveRecord::Schema.define(version: 20140321075159) do
     t.string   "uid"
     t.string   "provider"
     t.string   "icon"
+    t.integer  "account_id",    default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "account_id",    default: 3
   end
 
 end

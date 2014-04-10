@@ -16,7 +16,7 @@
       .col-xs-4
         = f.input :order, label: 'Rækkefølge', input_html: {value: pages.count + 1, class: 'form-control'}, as: :string
   - if params[:parent].present?
-    = f.input :page_id, label: false, input_html: {value: params[:parent]}
+    = f.input :page_id, label: false, input_html: {value: params[:parent]}, as: :hidden
   - else
     .row
       &nbsp;

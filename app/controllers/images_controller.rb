@@ -1,7 +1,7 @@
 class ImagesController < ApplicationController
 
   def index
-    @images = Image.all
+    @images = Image.is_image
   end
 
   def create

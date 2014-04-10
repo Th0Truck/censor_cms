@@ -24,11 +24,34 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.create(params[:user])
-    if @user.present?
-      redirect_to root_url, :notice => "Oprettet!"
+    if params[:user][:uid].present? && params[:user][:provider].present?
+      isuser = User.where(:uid => params[:user][:uid], :provider => params[:user][:provider])
+      if isuser.present?
+        @user = isuser
+        respond_to do |format|
+          format.html { redirect_to root_url, notice: 'Velkommen.' }
+          format.json { render json: root_url, status: :created, location: @user }
+        end
+      else
+        @user = User.new(params[:user])
+
+        respond_to do |format|
+          if @user.save
+            format.html { redirect_to root_url, notice: 'Du er nu oprettet.' }
+            format.json { render json: root_url, status: :created, location: @user }
+          else
+            format.html { render action: "new" }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end
+      end
     else
-      render "new"
+      @user = User.create(params[:user])
+      if @user.present?
+        redirect_to root_url, :notice => "Oprettet!"
+      else
+        render "new"
+      end
     end
   end
 

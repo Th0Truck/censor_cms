@@ -29,6 +29,9 @@ gem 'bootstrap-sass','~> 3.1.1'
 gem 'twitter-bootstrap-turbo'
 gem 'font-awesome-sass'
 
+#CKEditor
+gem 'ckeditor'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 gem 'haml'
@@ -51,6 +54,12 @@ gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'carrierwave'
 gem 'rmagick'
 gem 'mini_magick'
+
+#Omniauth
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-linkedin'
+gem "omniauth-google-oauth2"
 
 # Use unicorn as the app server
 # gem 'unicorn'

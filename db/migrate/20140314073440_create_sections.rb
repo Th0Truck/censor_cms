@@ -6,6 +6,7 @@ class CreateSections < ActiveRecord::Migration
       t.integer :user_id
       t.integer :order
       t.integer :page_id
+      t.integer :layout_id
 
       t.timestamps
     end

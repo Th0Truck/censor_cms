@@ -29,16 +29,51 @@ class User < ActiveRecord::Base
     end
   end
 
+  def constructor?
+    present? && account_id == 9
+  end
+
   def admin?
-    account_id == 1
+    present? && account_id >= 3
   end
 
   def editor?
-    account_id == 2
+    present? && account_id >= 2
   end
 
   def contributor?
-    account_id == 3
+    present? && account_id >= 1
   end
 
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      if auth.provider == 'facebook'
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.name = auth.info.name
+        user.oauth_token = auth.credentials.token
+        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        user.save!
+      elsif auth.provider == 'linkedin'
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.name = auth.info.name
+        #user.oauth_verifier = auth.credentials.oauth_verifier
+        user.oauth_token = auth.credentials.token
+        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        user.save!
+      elsif auth.provider == 'google_oauth2'
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.name = auth.info.name
+        user.email = auth.extra.raw_info.email
+        user.avatar = auth.extra.raw_info.picture
+        user.link = auth.extra.raw_info.link
+        user.oauth_token = auth.credentials.token
+        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        user.save!
+      end
+
+    end
+  end
 end

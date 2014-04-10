@@ -1,5 +1,9 @@
 CensorCms::Application.routes.draw do
 
+  resources :sections_sidebars
+
+  resources :sidebars
+
   resources :images do
     member do
       post 'saveimage' => :create
@@ -52,6 +56,17 @@ CensorCms::Application.routes.draw do
   match "sign_up" => "users#new", :as => "sign_up", via: [:get, :post]
   match "saveupload" => "uploads#create", :as => "saveupload", via: [:get, :post]
   match "saveimage" => "images#create", :as => "saveimage", via: [:get, :post]
+
+  get 'auth/failure', to: 'home#index'
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/:provider', to: 'sessions#create'
+  get 'oauth2callback', to: 'sessions#create'
+  get 'auth/facebook/setup', to: 'sessions#setup_facebook'
+  get 'auth/linkedin/setup', to: 'sessions#setup_linkedin'
+  get 'auth/googleplus/setup', to: 'sessions#setup_googleplus'
+
   #root :to => "users#new"
 
 

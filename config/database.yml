@@ -11,10 +11,10 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: censor-cms_development
+  database: thommygun-cms_development
   pool: 5
-  username: censor_cms
-  password: womanman
+  username: thommygun
+  password: rhatata
   host: 127.0.0.1
   port: 3306
 
@@ -24,19 +24,19 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  database: censor-cms_test
+  database: thommygun-cms_test
   pool: 5
-  username: censor_cms
-  password: womanman
+  username: thommygun
+  password: rhatata
   host: 127.0.0.1
   port: 3306
 
 production:
   adapter: mysql2
   encoding: utf8
-  database: censor-cms_production
+  database: thommygun-cms_production
   pool: 5
-  username: censor_cms
-  password: womanman
+  username: thommygun
+  password: rhatata
   host: 127.0.0.1
   port: 3306

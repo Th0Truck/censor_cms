@@ -5,7 +5,7 @@ class Page < ActiveRecord::Base
   has_many :pages
   has_many :sections
   belongs_to :setting
-  attr_accessible :name, :order, :page_id
+  attr_accessible :name, :order, :page_id, :setting_id
 
   def self.first_level
     where(page_id: nil)

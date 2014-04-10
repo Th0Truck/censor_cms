@@ -17,6 +17,22 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+
+    begin
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+        #redirect_to(root_url) if current_user.nil?
+    rescue
+      #redirect_to root_url, :alert => t('generic.requirelogin')
+    end
+  end
+
+  def cap
+    capitalize
+  end
+
+  def require_login
+    unless current_user
+      redirect_to login_url, :notice => 'Du skal være logget ind for at få adgang.'
+    end
   end
 end
