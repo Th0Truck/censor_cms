@@ -10,6 +10,7 @@
     .form-group
       .col-xs-4
         = f.input :name, label: 'Navn', :input_html => {:class => 'form-control', :size => 40}
+        = f.input :setting_id, label: false, as: :hidden, input_html: {value: current_domain.id}
       .col-xs-4
         = f.input :email, label: 'E-mail', :input_html => {:class => 'form-control'}
   .row
