@@ -36,14 +36,14 @@
         - if section.uploads.is_doc.present?
           - section.uploads.each do |file|
             .col-md-3.alert.alert-info
-              %i.fa-archive= file.title
+              %i.fa.fa-archive= file.title
   - else
     %article.col-md-8= raw section.article
     .sidebar.col-md-4{id: "sidebar_#{section.id}"}
       - if section.uploads.is_doc.present?
         - section.uploads.each do |file|
           .col-md-3.alert.alert-info
-            %i.fa-archive= file.title
+            %i.fa.fa-archive= file.title
     - if current_user.admin?
       .row &nbsp
       .row
