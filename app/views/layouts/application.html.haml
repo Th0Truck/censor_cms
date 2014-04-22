@@ -4,7 +4,7 @@
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
-    %title Thom:y[Gun]
+    %title= current_domain.name
   %body
     .navbar.navbar-default.navbar-fixed-top{"role" => "navigation"}
       .container-fluid
@@ -79,7 +79,7 @@
                   %li
                     = link_to "/auth/google_oauth2", id: "sign_in_gp" do
                       %i.fa.fa-google-plus-square
-                - if socialactive == 1
+                - if socialactive == 0
                   %li= link_to "Tilmeld", sign_up_path
                   %li= link_to "Log ind", log_in_path
 
