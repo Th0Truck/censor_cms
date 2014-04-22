@@ -3,6 +3,8 @@
   %head
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "//code.jquery.com/ui/1.10.4/jquery-ui.js", media: 'all'
+    = stylesheet_link_tag    "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
     = csrf_meta_tags
     %title= current_domain.name
   %body
