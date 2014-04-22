@@ -10,12 +10,13 @@ class SessionsController < ApplicationController
       user = User.authenticate(params[:email], params[:password])
     end
 
-    if user
+    if user && user.setting_id == current_domain.id
       session[:user_id] = user.id
       flash[:success] = "Velkommen #{user.name}"
       redirect_to root_url
     else
       flash[:alert] = "Forkert e-mail eller password"
+      user = nil
       render "new"
     end
   end
