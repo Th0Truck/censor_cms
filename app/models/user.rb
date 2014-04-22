@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :sections, through: :user_sections
   has_many :pages, through: :user_pages
   belongs_to :account
-  attr_accessible :name, :email, :password, :password_confirmation, :account
+  attr_accessible :name, :email, :password, :password_confirmation, :account, :setting_id
 
   attr_accessor :password
   before_save :encrypt_password
