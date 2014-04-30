@@ -44,7 +44,7 @@
         - section.uploads.each do |file|
           .col-md-3.alert.alert-info
             %i.fa.fa-archive= file.title
-    - if current_user.admin?
+    - if current_admin.admin?
       .row &nbsp
       .row
         %hr

@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SessionsController < ApplicationController
   def new
 
@@ -7,10 +8,10 @@ class SessionsController < ApplicationController
     if auth_hash && auth_hash.present?
       user = User.from_omniauth(auth_hash)
     else
-      user = User.authenticate(params[:email], params[:password])
+      user = User.authenticate(params[:email], params[:password],current_domain.id)
     end
 
-    if user && user.setting_id == current_domain.id
+    if user
       session[:user_id] = user.id
       flash[:success] = "Velkommen #{user.name}"
       redirect_to root_url

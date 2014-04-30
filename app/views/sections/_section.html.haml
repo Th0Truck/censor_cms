@@ -8,7 +8,7 @@
       - section.uploads.each do |file|
         .col-md-3.alert.alert-info
           %i.fa-archive= file.title
-- if current_user.admin?
+- if current_admin.admin?
   .col-md-12
     .btn-group
       = link_to 'Redigér afsnit', edit_section_path(section), class: 'btn btn-primary'

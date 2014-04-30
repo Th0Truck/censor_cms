@@ -1,10 +1,14 @@
 class User < ActiveRecord::Base
 
+  has_many :user_accounts
+  has_many :user_settings
+  has_many :user_pages
+  has_many :user_sections
   has_many :sections, through: :user_sections
   has_many :pages, through: :user_pages
-  belongs_to :account
-  belongs_to :setting
-  attr_accessible :name, :email, :password, :password_confirmation, :account, :setting_id
+  has_many :settings, through: :user_settings
+  has_many :accounts, through: :user_accounts
+  attr_accessible :name, :email, :password, :password_confirmation, :accounts, :user_accounts
 
   attr_accessor :password
   before_save :encrypt_password
@@ -14,9 +18,10 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
-  def self.authenticate(email, password)
+
+  def self.authenticate(email, password, domain)
     user = User.find_by_email(email)
-    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt) && user.settings.where(id: domain)
       user
     else
       nil
@@ -30,20 +35,24 @@ class User < ActiveRecord::Base
     end
   end
 
-  def constructor?
-    present? && account_id == 9
+  def self.constructor?
+    accounts.where(:id => 9)
+    #&& settings.where(:id => current_domain.id)
   end
 
   def admin?
-    present? && account_id >= 3
+    accounts.where('id >= ?' => 3)
+    #&& settings.where(:id => current_domain.id)
   end
 
   def editor?
-    present? && account_id >= 2
+    accounts.where('id >= ?' => 2)
+    #&& settings.where(:id => current_domain.id)
   end
 
   def contributor?
-    present? && account_id >= 1
+    accounts.where('id >= ?' => 1)
+    #&& settings.where(:id => current_domain.id)
   end
 
   def self.from_omniauth(auth)
@@ -77,4 +86,5 @@ class User < ActiveRecord::Base
 
     end
   end
+
 end

@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
 
   def current_domain
     if @current_domain.blank?
-      #@current_domain = current_user && current_user.domain
       @current_domain ||= Setting.find_by_id(session[:domain_id])
       @current_domain ||= Setting.for_host(request.host)
     end
@@ -18,13 +17,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-
-    begin
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
-        #redirect_to(root_url) if current_user.nil?
-    rescue
-      #redirect_to root_url, :alert => t('generic.requirelogin')
-    end
+    @current_user ||= User.find_by_id(session[:user_id])
+    @current_user ||= @current_user.present? && @current_user.settings.where(id: current_domain.id)
+    @current_user = @current_user.settings.map { |d| d.id == current_domain.id }
   end
 
   def cap
