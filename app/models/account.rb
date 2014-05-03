@@ -4,7 +4,7 @@ class Account < ActiveRecord::Base
   has_many :users, through: :user_accounts
 
   def self.constructor
-    where('id >= ?', 9)
+    where('account_id >= ?', 9)
   end
 
   def self.administrator
@@ -12,11 +12,11 @@ class Account < ActiveRecord::Base
   end
 
   def self.editor
-    where('id >= ?', 2)
+    where('account_id >= ?', 1)
   end
 
   def self.contributor
-    where('id >= ?', 2)
+    where('account_id >= ?', 1)
   end
 
 end
