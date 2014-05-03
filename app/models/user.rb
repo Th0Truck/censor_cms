@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :pages, through: :user_pages
   has_many :settings, through: :user_settings
   has_many :accounts, through: :user_accounts
-  attr_accessible :name, :email, :password, :password_confirmation, :accounts, :user_accounts
+  attr_accessible :name, :email, :password, :password_confirmation, :accounts, :user_accounts, :user_settings
 
   attr_accessor :password
   before_save :encrypt_password
@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
 
-  def self.authenticate(email, password, domain)
+  def self.authenticate(email, password)
     user = User.find_by_email(email)
-    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt) && user.settings.where(id: domain)
+    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else
       nil
@@ -35,13 +35,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def domain_ids
+    settings.map(&:id)
+  end
+
   def self.constructor?
-    accounts.where(:id => 9)
+    accounts.where(:account_id => 9)
     #&& settings.where(:id => current_domain.id)
   end
 
   def admin?
-    accounts.where('id >= ?' => 3)
+    accounts.administrator.any?
+    #accounts.where('id >= ?', 3)
     #&& settings.where(:id => current_domain.id)
   end
 

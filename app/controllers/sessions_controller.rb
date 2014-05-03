@@ -6,9 +6,9 @@ class SessionsController < ApplicationController
 
   def create
     if auth_hash && auth_hash.present?
-      user = User.from_omniauth(auth_hash)
+      user = current_domain.users.from_omniauth(auth_hash)
     else
-      user = User.authenticate(params[:email], params[:password],current_domain.id)
+      user = current_domain.users.authenticate(params[:email], params[:password])
     end
 
     if user

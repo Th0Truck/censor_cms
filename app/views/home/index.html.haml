@@ -6,6 +6,6 @@
     .col-md-8= raw current_domain.info
     .com-md-4 Empty
 
-  - if current_user && current_user.admin?
+  - if current_user.present? && current_user.admin?
     .row
       .col-xs-4= link_to 'Redigér', edit_setting_path(current_domain.id), class: 'btn btn-primary'

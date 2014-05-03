@@ -17,9 +17,12 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
-    @current_user ||= @current_user.present? && @current_user.settings.where(id: current_domain.id)
-    @current_user = @current_user.settings.map { |d| d.id == current_domain.id }
+    if session[:user_id].present?
+      @current_user ||= User.find_by_id(session[:user_id])
+      @current_user ||= @current_user.present? && @current_user.settings.where(id: current_domain.id)
+      #@current_user ||= @current_user.settings.map { |d| d.id == current_domain.id }
+    end
+    @current_user
   end
 
   def cap

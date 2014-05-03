@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
   end
 
   def self.administrator
-    where('id >= ?', 3)
+    where('account_id >= ?', 3)
   end
 
   def self.editor

@@ -45,6 +45,25 @@ class UsersController < ApplicationController
           end
         end
       end
+    elsif User.authenticate(params[:user][:email], params[:user][:password]).present?
+      @user = User.authenticate(params[:user][:email], params[:user][:password])
+      if !current_domain.users.includes(@user).present?
+        user_setting = UserSetting.new()
+        user_setting.user_id = @user.id
+        user_setting.setting_id = current_domain.id
+        user_setting.account_id = 0
+        user_setting.save!
+        ding = 'created'
+      end
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to root_url, notice: "Du er nu oprettet." }
+          format.json { render json: root_url, status: :created, location: @user }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
     else
       @user = User.create(params[:user])
       if @user.present?
