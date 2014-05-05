@@ -46,8 +46,6 @@ class User < ActiveRecord::Base
 
   def admin?
     accounts.administrator.any?
-    #accounts.where('id >= ?', 3)
-    #&& settings.where(:id => current_domain.id)
   end
 
   def editor?

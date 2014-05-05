@@ -14,10 +14,12 @@
         = f.input :name, label: 'Navn', as: :string, input_html: {size: 40, class: 'form-control'}
   .row
     .form-group
-      .col-xs-6
-        = f.input :login, label: 'Aktivér login', as: :boolean, input_html: {class: 'form-control'}
-      .col-xs-6
-        = f.input :footer, label: 'Aktivér footer', as: :boolean, input_html: {class: 'form-control'}
+      %label.col-xs-2
+        Aktivér login
+        = f.input :login, label: false, as: :boolean, input_html: {}
+      %label.col-xs-2
+        Aktivér footer
+        = f.input :footer, label: false, as: :boolean, input_html: {}
   .row
     .form-group
       .col-xs-12
