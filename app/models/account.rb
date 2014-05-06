@@ -4,7 +4,7 @@ class Account < ActiveRecord::Base
   has_many :users, through: :user_accounts
 
   def self.constructor
-    where('account_id >= ?', 9)
+    where('account_id = ?', 9)
   end
 
   def self.administrator

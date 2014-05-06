@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def self.constructor?
-    accounts.where(:account_id => 9)
+    accounts.constructor.any?
     #&& settings.where(:id => current_domain.id)
   end
 
@@ -49,12 +49,12 @@ class User < ActiveRecord::Base
   end
 
   def editor?
-    accounts.where('id >= ?' => 2)
+    accounts.editor.any?
     #&& settings.where(:id => current_domain.id)
   end
 
   def contributor?
-    accounts.where('id >= ?' => 1)
+    accounts.contributor.any?
     #&& settings.where(:id => current_domain.id)
   end
 
