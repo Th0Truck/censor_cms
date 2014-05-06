@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
   end
 
   def self.editor
-    where('account_id >= ?', 1)
+    where('account_id >= ?', 2)
   end
 
   def self.contributor
