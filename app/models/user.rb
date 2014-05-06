@@ -41,7 +41,6 @@ class User < ActiveRecord::Base
 
   def self.constructor?
     accounts.constructor.any?
-    #&& settings.where(:id => current_domain.id)
   end
 
   def admin?
@@ -50,12 +49,10 @@ class User < ActiveRecord::Base
 
   def editor?
     accounts.editor.any?
-    #&& settings.where(:id => current_domain.id)
   end
 
   def contributor?
     accounts.contributor.any?
-    #&& settings.where(:id => current_domain.id)
   end
 
   def self.from_omniauth(auth)

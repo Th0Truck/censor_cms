@@ -48,7 +48,7 @@
                 = link_to new_page_path do
                   %i.fa.fa-plus-square
                   Opret ny side
-            - if current_user.present? && current_user.contributor?
+            - if current_user.present? && current_user.constructor?
               %li
                 = link_to edit_setting_path(current_domain.id) do
                   %i.fa.fa-gears
