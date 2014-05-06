@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     settings.map(&:id)
   end
 
-  def self.constructor?
+  def constructor?
     accounts.constructor.any?
   end
 
