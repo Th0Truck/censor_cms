@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :current_domain
+  helper_method :current_user, :current_domain, :current_setting
 
   private
 
@@ -18,12 +18,19 @@ class ApplicationController < ActionController::Base
 
   def current_user
     if session[:user_id].present?
-      @current_user ||= User.find_by_id(session[:user_id])
-      @current_user ||= @current_user.present? && @current_user.settings.where(id: current_domain.id) && @current_user.accounts.map { |a| a.setting_id == current_domain.id}
-      #@current_user ||= @current_user.present? && @current_user.settings.where(id: current_domain.id) && @current_user.accounts.select('setting_id = ?', current_domain.id)
-      #@current_user ||= @current_user.settings.map { |d| d.id == current_domain.id }
+      #@current_user = @current_users.where(id: session[:user_id])
+      @current_user = User.find_by_id(session[:user_id])
+      @current_user.settings = @current_user.settings.where(id: @current_domain.id)
+      #@current_user = @current_user.where(setting: {setting_id: @current_domain.id}).joins(:user_settings)
+      #@current_user = @current_user.accounts.map { |a| a.setting_id == @current_domain.id}
+      #@current_user ||= @current_user.present? && @current_user.settings.where(id: current_domain.id) && @current_user.accounts.where('setting_id = ?', current_domain.id)
+      #@current_user = @current_user.user_accounts.map { |d| d.setting_id == @current_domain.id }
     end
     @current_user
+  end
+
+  def current_setting
+    @current_setting = @current_user.settings.where(id: @current_domain.id)
   end
 
   def cap

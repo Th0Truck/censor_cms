@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
-  has_many :user_accounts
   has_many :user_settings
+  has_many :user_accounts
   has_many :user_pages
   has_many :user_sections
   has_many :sections, through: :user_sections
