@@ -43,12 +43,12 @@
               - else
                 %li= link_to page.name, page
 
-            - if current_user.present? && current_user.admin?
+            - if current_user.admin(current_domain.id).present?
               %li
                 = link_to new_page_path do
                   %i.fa.fa-plus-square
                   Opret ny side
-            - if current_user.present? && current_user.constructor?
+            - if current_user.constructor(current_domain.id).present?
               %li
                 = link_to edit_setting_path(current_domain.id) do
                   %i.fa.fa-gears

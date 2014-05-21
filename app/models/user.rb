@@ -40,19 +40,35 @@ class User < ActiveRecord::Base
   end
 
   def constructor?
-    accounts.constructor.any?
+    user_settings.constructor.any?
+  end
+
+  def constructor(id)
+    user_settings.where('account_id = ? AND setting_id = ?', 9, id)
   end
 
   def admin?
-    accounts.administrator.any?
+    user_settings.administrator.any?
+  end
+
+  def admin(id)
+    user_settings.where('account_id >= ? AND setting_id = ?', 3, id)
   end
 
   def editor?
-    accounts.editor.any?
+    user_settings.editor.any?
+  end
+
+  def editor(id)
+    user_settings.where('account_id >= ? AND setting_id = ?', 2, id)
   end
 
   def contributor?
-    accounts.contributor.any?
+    user_settings.contributor.any?
+  end
+
+  def contributor(id)
+    user_settings.where('account_id >= ? AND setting_id = ?', 1, id)
   end
 
   def self.from_omniauth(auth)
