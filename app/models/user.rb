@@ -52,7 +52,8 @@ class User < ActiveRecord::Base
   end
 
   def admin(id)
-    user_settings.where('account_id >= ? AND setting_id = ?', 3, id)
+    user_settings.administrator(id)
+    #user_settings.where('account_id >= ? AND setting_id = ?', 3, id)
   end
 
   def editor?

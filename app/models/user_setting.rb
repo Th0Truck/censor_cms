@@ -10,12 +10,8 @@ class UserSetting < ActiveRecord::Base
     where('account_id = ?', 9)
   end
 
-  def self.administrator
+  def self.administrator(id)
     where('account_id >= ? AND setting_id = ?', 3, current_domain.id)
-  end
-
-  def self.administratorer
-    where('account_id >= ?', 3).joins(:users)
   end
 
   def self.editor
