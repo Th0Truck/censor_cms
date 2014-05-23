@@ -9,15 +9,14 @@ class ApplicationController < ActionController::Base
   private
 
   def current_domain
-    if @current_domain.blank?
-      #@current_domain ||= Setting.find_by_id(session[:domain_id])
+    if @current_domain.blank? || @current_domain.present?
       @current_domain ||= Setting.for_host(request.host)
     end
     @current_domain
   end
 
   def current_user
-    @current_user ||= current_domain.users.find_by_id(session[:user_id])
+    @current_user ||= current_domain.users.find(session[:user_id])
   end
 
   def cap
