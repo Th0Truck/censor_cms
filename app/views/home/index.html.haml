@@ -4,7 +4,7 @@
     = current_domain.name
   %article
     .col-md-8= raw current_domain.info
-    .com-md-4 Empty
+    .col-md-4 Empty
 
   - if current_user.present? && current_user.admin(current_domain.id).present?
     .row

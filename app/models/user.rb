@@ -44,7 +44,6 @@ class User < ActiveRecord::Base
   end
 
   def admin(id)
-    #user_settings.administrator(id)
     user_settings.where('account_id >= ? AND setting_id = ?', 3, id)
   end
 
@@ -54,6 +53,10 @@ class User < ActiveRecord::Base
 
   def contributor(id)
     user_settings.where('account_id >= ? AND setting_id = ?', 1, id)
+  end
+
+  def account(id)
+    user_settings.where('setting_id = ?', id)
   end
 
   def self.from_omniauth(auth)
