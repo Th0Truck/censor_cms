@@ -39,33 +39,17 @@ class User < ActiveRecord::Base
     settings.map(&:id)
   end
 
-  def constructor?
-    user_settings.constructor.any?
-  end
-
   def constructor(id)
     user_settings.where('account_id = ? AND setting_id = ?', 9, id)
   end
 
-  def admin?
-    user_settings.administrator.any?
-  end
-
   def admin(id)
-    user_settings.administrator(id)
-    #user_settings.where('account_id >= ? AND setting_id = ?', 3, id)
-  end
-
-  def editor?
-    user_settings.editor.any?
+    #user_settings.administrator(id)
+    user_settings.where('account_id >= ? AND setting_id = ?', 3, id)
   end
 
   def editor(id)
     user_settings.where('account_id >= ? AND setting_id = ?', 2, id)
-  end
-
-  def contributor?
-    user_settings.contributor.any?
   end
 
   def contributor(id)
