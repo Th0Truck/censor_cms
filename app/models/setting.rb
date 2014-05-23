@@ -13,20 +13,4 @@ class Setting < ActiveRecord::Base
 
   end
 
-  def self.constructor
-    where('account_id = ?', 9)
-  end
-
-  def self.administrator
-    where('account_id >= ?', 3)
-  end
-
-  def self.editor
-    where('account_id >= ?', 2)
-  end
-
-  def self.contributor
-    where('account_id >= ?', 1)
-  end
-
 end
