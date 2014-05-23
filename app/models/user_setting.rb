@@ -6,19 +6,19 @@ class UserSetting < ActiveRecord::Base
 
   private
 
-  def self.constructor(id)
+  def constructor(id)
     where('account_id = ? AND setting_id = ?', 9, id)
   end
 
-  def self.administrator(id)
+  def administrator(id)
     where('account_id >= ? AND setting_id = ?', 3, id)
   end
 
-  def self.editor(id)
+  def editor(id)
     where('account_id >= ? AND setting_id = ?', 2, id)
   end
 
-  def self.contributor(id)
+  def contributor(id)
     where('account_id >= ? AND setting_id = ?', 1, id)
   end
 

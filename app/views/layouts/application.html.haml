@@ -35,7 +35,7 @@
                   %ul.dropdown-menu
                     - second_level.each do |level_two|
                       %li= link_to level_two.name, level_two
-                    - if current_user.present? && current_user.admin?
+                    - if current_user.admin(current_domain.id).present?
                       %li
                         = link_to new_page_path(:parent => page.id) do
                           %i.fa.fa-plus-square
