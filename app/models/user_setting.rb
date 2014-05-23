@@ -22,4 +22,5 @@ class UserSetting < ActiveRecord::Base
     where('account_id >= ? AND setting_id = ?', 1, id)
   end
 
+
 end
