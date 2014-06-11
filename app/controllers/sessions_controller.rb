@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if auth_hash && auth_hash.present?
       user = current_domain.users.from_omniauth(auth_hash)
     else
-      user = current_domain.users.authenticate(params[:email], params[:password])
+      user = current_domain.users.authenticate(params[:email], params[:password], params[:setting_id])
     end
 
     if user
