@@ -19,10 +19,18 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
 
-  def self.authenticate(email, password)
+  def self.authenticate(email, password, setting_id)
     user = User.find_by_email(email)
-    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
-      user
+    if user
+      setting = user.user_settings.where(setting_id: setting_id).uniq
+    end
+
+    if !setting.empty? && user
+      if setting.password_hash == BCrypt::Engine.hash_secret(password, setting.password_salt)
+        user
+      else
+        nil
+      end
     else
       nil
     end

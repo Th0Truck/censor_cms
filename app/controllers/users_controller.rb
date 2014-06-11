@@ -45,13 +45,17 @@ class UsersController < ApplicationController
           end
         end
       end
-    elsif User.authenticate(params[:user][:email], params[:user][:password]).present?
-      @user = User.authenticate(params[:user][:email], params[:user][:password])
-      if !current_domain.users.includes(@user).present?
+    elsif User.authenticate(params[:user][:email], params[:user][:password], params[:user][:setting_id]).present?
+      @user = User.authenticate(params[:user][:email], params[:user][:password], params[:user][:setting_id])
+      if @user.present?
+        salt = BCrypt::Engine.generate_salt
         user_setting = UserSetting.new()
         user_setting.user_id = @user.id
-        user_setting.setting_id = current_domain.id
+        user_setting.setting_id = params[:user][:setting_id]
         user_setting.account_id = 0
+        user_setting.password_salt = salt
+        user_setting.password_hash = BCrypt::Engine.hash_secret(password, salt)
+        user_setting.password = params[:user][:password]
         user_setting.save!
         ding = 'created'
       end
@@ -64,9 +68,33 @@ class UsersController < ApplicationController
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
+
+    elsif User.where(email: params[:user][:email]).present?
+      user = User.where(email: params[:user][:email])
+      if user.present?
+        salt = BCrypt::Engine.generate_salt
+        user_setting = user.user_settings.new()
+        #user_setting.user = user
+        user_setting.setting_id = params[:user][:setting_id]
+        user_setting.account_id = 1
+        user_setting.password_salt = salt
+        user_setting.password_hash = BCrypt::Engine.hash_secret(password, salt)
+        user_setting.password = params[:user][:password]
+        user_setting.save!
+        ding = 'created'
+      end
     else
-      @user = User.create(params[:user])
-      if @user.present?
+      user = User.create(params[:user])
+      if user.present?
+        salt = BCrypt::Engine.generate_salt
+        user_setting = UserSetting.new()
+        user_setting.user_id = user.id
+        user_setting.setting_id = params[:user][:setting_id]
+        user_setting.account_id = 2
+        user_setting.password_salt = salt
+        user_setting.password_hash = BCrypt::Engine.hash_secret(password, salt)
+        user_setting.password = params[:user][:password]
+        user_setting.save!
         redirect_to root_url, :notice => "Oprettet!"
       else
         render "new"

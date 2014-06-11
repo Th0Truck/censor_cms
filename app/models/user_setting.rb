@@ -4,6 +4,8 @@ class UserSetting < ActiveRecord::Base
   belongs_to :user
   belongs_to :setting
 
+  attr_accessor :password_hash
+  before_save :encrypt_password
   private
 
   def constructor(id)
@@ -22,5 +24,10 @@ class UserSetting < ActiveRecord::Base
     where('account_id >= ? AND setting_id = ?', 1, id)
   end
 
-
+  def encrypt_password
+    if password.present?
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+    end
+  end
 end
