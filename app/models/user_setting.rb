@@ -4,7 +4,6 @@ class UserSetting < ActiveRecord::Base
   belongs_to :user
   belongs_to :setting
 
-  attr_accessor :password_hash
   before_save :encrypt_password
   private
 
@@ -22,6 +21,13 @@ class UserSetting < ActiveRecord::Base
 
   def contributor(id)
     where('account_id >= ? AND setting_id = ?', 1, id)
+  end
+
+  def self.new_user(setting, password)
+    create(account_id: 0,password: password,setting_id:setting)
+    #account_id = 0
+    #password = password
+    #setting_id = setting
   end
 
   def encrypt_password
