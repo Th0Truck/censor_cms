@@ -10,7 +10,7 @@ class UserSetting < ActiveRecord::Base
     where('account_id = ? AND setting_id = ?', 9, id)
   end
 
-  def administrator(id)
+  def admin(id)
     where('account_id >= ? AND setting_id = ?', 3, id)
   end
 
