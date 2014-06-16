@@ -4,6 +4,8 @@ class UserSetting < ActiveRecord::Base
   belongs_to :user
   belongs_to :setting
 
+  attr_accessible :password, :password_salt, :password_hash
+
   before_save :encrypt_password
   private
 

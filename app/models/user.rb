@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :accounts, :user_accounts, :user_settings
 
   attr_accessor :password
-  before_save :encrypt_password
+  #before_save :encrypt_password
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
@@ -22,10 +22,10 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password, setting_id)
     user = User.find_by_email(email)
     if user
-      setting = user.user_settings.where(setting_id: setting_id).uniq
+      setting = user.user_settings.where(setting_id: setting_id).first
     end
 
-    if !setting.empty? && user
+    if setting.present? && user
       if setting.password_hash == BCrypt::Engine.hash_secret(password, setting.password_salt)
         user
       else

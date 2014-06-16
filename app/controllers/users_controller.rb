@@ -48,8 +48,7 @@ class UsersController < ApplicationController
     elsif User.authenticate(params[:user][:email], params[:user][:password], params[:user][:setting_id]).present?
       @user = User.authenticate(params[:user][:email], params[:user][:password], params[:user][:setting_id])
       if @user.present?
-        user_setting = UserSetting.new()
-        user_setting.user_id = @user.id
+        user_setting = @user.user_settings.new()
         user_setting.setting_id = params[:user][:setting_id]
         user_setting.password = params[:user][:password]
         user_setting.save!
