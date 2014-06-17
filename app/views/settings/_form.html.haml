@@ -39,6 +39,18 @@
   .row
     .form-group
       .col-xs-12
+        = f.input :css, label: 'Stylesheet', as: :text, input_html: {rows: 12, class: 'form-control'}
+  .row
+    %hr
+  .row
+    .form-group
+      .col-xs-12
+        = f.input :js, label: 'Javascript', as: :text, input_html: {rows: 12, class: 'form-control'}
+  .row
+    %hr
+  .row
+    .form-group
+      .col-xs-12
         .btn-group
           = submit_tag 'Gem', :class => 'btn btn-primary'
           = link_to 'Annuller', root_path, class: 'btn btn-default'
