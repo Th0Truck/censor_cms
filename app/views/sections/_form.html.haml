@@ -30,8 +30,8 @@
         .alert.alert-info
           %h5
             = link_to upload.title, upload
-            = link_to upload_path, method: :destroy do
-              %i.fa-trash-o
+            = link_to upload_path, method: :delete, confirm: 'Er du sikker?' do
+              %i.fa.fa-trash-o
   .row
     %hr
   .row

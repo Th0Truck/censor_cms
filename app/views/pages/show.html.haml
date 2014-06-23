@@ -1,7 +1,10 @@
 .row &nbsp;
+- edit_button = false
 - @page.sections.each do |section|
+  - edit_button = true
   %h1.col-md-12= section.header
   - imgnum = section.images.count
+  = imgnum
   - if section.images.present?
     %article.col-md-12
       - if imgnum > 1
@@ -44,14 +47,17 @@
         - section.uploads.each do |file|
           .col-md-3.alert.alert-info
             %i.fa.fa-archive= file.title
-    - if current_admin.admin?
-      .row &nbsp
-      .row
-        %hr
-      .col-md-12
-        .btn-group
-          = link_to 'Redigér afsnit', edit_section_path(section), class: 'btn btn-primary'
-          = link_to 'Redigér side', edit_page_path(@page), class: 'btn btn-primary'
-          = link_to 'Nyt afsnit', new_section_path(:page_id => @page.id), class: 'btn btn-default'
-      .row
-        %hr
+  .row
+    %hr
+    .col-md-12
+      .btn-group= link_to 'Redigér afsnit', edit_section_path(section), class: 'btn btn-primary' if edit_button.present?
+- if current_user.present? && current_user.admin(current_domain.id).present?
+  .row &nbsp
+  .row
+    %hr
+  .col-md-12
+    .btn-group
+      = link_to 'Redigér side', edit_page_path(@page), class: 'btn btn-primary'
+      = link_to 'Nyt afsnit', new_section_path(:page_id => @page.id), class: 'btn btn-default'
+  .row
+    %hr

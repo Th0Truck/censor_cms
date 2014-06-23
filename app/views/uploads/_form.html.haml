@@ -55,11 +55,14 @@
                 if ($('#section_id'))
                 {formdata.append("places[section_id]", $('#section_id').val());}
             }
+
             url = '/saveupload';
             if ((files.item(i).type == 'image/jpeg') || (files.item(i).type == 'image/jpg') || (files.item(i).type == 'image/png') || (files.item(i).type == 'image/gif'))
             {
+              console.log(files.item(i).type);
               url = '/saveimage';
             }
+            console.log(url);
             if (formdata) {
               var theUploader = $.ajax({
                 url: url,
