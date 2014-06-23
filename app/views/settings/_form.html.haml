@@ -9,9 +9,9 @@
   .row
     .form-group
       .col-xs-6
-        = f.input :domain, label: 'Domæne', as: :string, input_html: {size: 40, class: 'form-control'}
+        = f.input :domain, label: 'Domæne', as: :string, input_html: { size: 40, class: 'form-control' }
       .col-xs-6
-        = f.input :name, label: 'Navn', as: :string, input_html: {size: 40, class: 'form-control'}
+        = f.input :name, label: 'Navn', as: :string, input_html: { size: 40, class: 'form-control' }
   .row
     .form-group
       %label.col-xs-2
@@ -37,20 +37,33 @@
   .row
     %hr
   .row
+    .col-md-12.ace_editor
+
+  .row
     .form-group
       .col-xs-12
-        = f.input :css, label: 'Stylesheet', as: :text, input_html: {rows: 12, class: 'form-control'}
+        = f.input :css, label: 'Stylesheet', as: :text, input_html: {rows: 12, class: 'form-control setting_css'}
   .row
     %hr
   .row
     .form-group
       .col-xs-12
-        = f.input :js, label: 'Javascript', as: :text, input_html: {rows: 12, class: 'form-control'}
+        = f.input :js, label: 'Javascript', as: :text, input_html: {rows: 12, class: 'form-control setting_js'}
   .row
     %hr
   .row
     .form-group
       .col-xs-12
         .btn-group
-          = submit_tag 'Gem', :class => 'btn btn-primary'
           = link_to 'Annuller', root_path, class: 'btn btn-default'
+          = submit_tag 'Gem', :class => 'btn btn-primary'
+  :javascript
+
+    //var csseditor = ace.edit("setting_css");
+    var jseditor = ace.edit("setting_js");
+
+    //csseditor.setTheme("ace/theme/clouds");
+    //csseditor.setMode("ace/mode/stylesheet");
+    jseditor.setSession().setTheme("ace/theme/monokai");
+    jseditor.setSession().setMode("ace/mode/javascript");
+

@@ -46,6 +46,9 @@ gem 'jbuilder', '~> 1.2'
 #Simple forms
 gem 'simple_form'
 
+#AceEditor
+gem 'jquery-ace-rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
