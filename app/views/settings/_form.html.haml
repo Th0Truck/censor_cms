@@ -25,6 +25,8 @@
       .col-xs-12
         = f.input :info, label: 'Forside', as: :text, input_html: {size: 40, class: 'form-control'}
   .row
+    %hr
+  .row
     .form-group
       .col-xs-3
         = f.input :analytics_api, label: 'Google Analytics API', as: :string, input_html: {size: 40, class: 'form-control'}
@@ -60,10 +62,10 @@
   :javascript
 
     //var csseditor = ace.edit("setting_css");
-    var jseditor = ace.edit("setting_js");
+    //var jseditor = ace.edit("setting_js");
 
     //csseditor.setTheme("ace/theme/clouds");
     //csseditor.setMode("ace/mode/stylesheet");
-    jseditor.setSession().setTheme("ace/theme/monokai");
-    jseditor.setSession().setMode("ace/mode/javascript");
+    //jseditor.setTheme("ace/theme/monokai");
+    //jseditor.setSession().setMode("ace/mode/javascript");
 

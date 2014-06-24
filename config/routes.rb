@@ -71,6 +71,9 @@ CensorCms::Application.routes.draw do
   get 'auth/linkedin/setup', to: 'sessions#setup_linkedin'
   get 'auth/googleplus/setup', to: 'sessions#setup_googleplus'
 
+  match 'stylesheet.css' => 'settings#stylesheet', as: 'stylesheet', format: 'css', via: [:get, :post]
+  match 'javascript.js' => 'settings#javascript', as: 'javascript', format: 'js', via: [:get, :post]
+
   #root :to => "users#new"
 
 

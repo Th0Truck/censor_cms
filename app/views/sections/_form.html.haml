@@ -22,7 +22,7 @@
           = f.input :order, as: :hidden, input_html: { value: page.sections.count }
       .col-md-4
         %label Sidebar
-        = collection_select :sidebar, :sidebar_id, current_domain.sidebars, :id, :name, { prompt: 'Vælg en sidebar' }, { class: 'form-control' }
+        =# collection_select :sidebar, :sidebar_id, current_domain.sidebars, :id, :name, { prompt: 'Vælg en sidebar' }, { class: 'form-control' }
         %label Filer
         = render 'uploads/form' if @section.persisted?
   .row

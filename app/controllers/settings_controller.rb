@@ -62,6 +62,14 @@ class SettingsController < ApplicationController
     end
   end
 
+  def stylesheet
+    render :partial => 'shared/stylesheet'
+  end
+
+  def javascript
+    render :partial => 'shared/javascript'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_setting
