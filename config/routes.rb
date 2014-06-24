@@ -34,7 +34,11 @@ CensorCms::Application.routes.draw do
 
   resources :users
 
-  resources :sections
+  resources :sections do
+    collection do
+      post :sort
+    end
+  end
 
   resources :pages
 

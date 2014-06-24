@@ -61,6 +61,13 @@ class SectionsController < ApplicationController
     end
   end
 
+  def sort
+    section = Section.find(params[:id])
+    section.order = params[:order]
+    section.save!
+    render nothing: true
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_section

@@ -7,6 +7,6 @@ class Section < ActiveRecord::Base
   has_many :sidebars, through: :sections_sidebars
   belongs_to :page
 
-  attr_accessible :header, :article, :user_id, :page_id, :files
+  attr_accessible :header, :article, :user_id, :page_id, :files, :order
 
 end

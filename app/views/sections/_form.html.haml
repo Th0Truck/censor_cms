@@ -17,6 +17,9 @@
         = f.input :user_id, as: :hidden, input_html: { value: current_user.id }
         = f.input :page_id, as: :hidden, input_html: { value: params[:page_id] }
         = f.input :id, as: :hidden, input_html: { value: params[:id] } if @section.persisted?
+        - if !@section.persisted?
+          - page = Page.find(params[:page_id])
+          = f.input :order, as: :hidden, input_html: { value: page.sections.count }
       .col-md-4
         %label Sidebar
         = collection_select :sidebar, :sidebar_id, current_domain.sidebars, :id, :name, { prompt: 'Vælg en sidebar' }, { class: 'form-control' }
