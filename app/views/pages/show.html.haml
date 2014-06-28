@@ -3,7 +3,7 @@
 #sortable
   - @page.sections.order(:order).each do |section|
     - sortclass = current_user.present? && current_user.admin(current_domain.id).present? ? 'sort_class' : ''
-    %article{class: sortclass, data: {id: section.id, update: sort_sections_url}}
+    %article{class: sortclass, data: {id: section.id, update: sort_sections_url},style: "background-color:##{section.bgcolor};"}
       - if current_user.present? && current_user.admin(current_domain.id).present?
         .sort_control
           .label.label-default

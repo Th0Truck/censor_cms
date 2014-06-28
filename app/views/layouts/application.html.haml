@@ -9,10 +9,10 @@
     = stylesheet_link_tag '/stylesheet.css' unless current_domain.css == ""
     = csrf_meta_tags
     %title= current_domain.name
-  %body
+  %body.index
     .navbar.navbar-default.navbar-fixed-top{"role" => "navigation"}
-      .container-fluid
-        .navbar-header
+      .container
+        .navbar-header.page-scroll
           %button.navbar-toggle{"data-toggle" => 'collapse',"data-target" => "#bs-navbar-collapse-1"}
             .sr-only Menu
             .icon-bar
@@ -102,12 +102,12 @@
                       Log ind
 
     .container-fluid
-      .row &nbsp;
-      .row &nbsp;
-      - flash.each do |name, msg|
-        .row &nbsp;
-        %div.alert.alert-dismissable{:class => flash_class(name)}
-          = msg
-          %button.close{"aria-hidden" => 'hidden','data-dismiss' => 'alert'} &times;
-      = yield
-      .footer
+      %section
+        - flash.each do |name, msg|
+          .row &nbsp;
+          %div.alert.alert-dismissable{:class => flash_class(name)}
+            = msg
+            %button.close{"aria-hidden" => 'hidden','data-dismiss' => 'alert'} &times;
+        = yield
+      - if current_domain.footer.present?
+        .footer

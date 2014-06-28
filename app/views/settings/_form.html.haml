@@ -39,18 +39,13 @@
   .row
     %hr
   .row
-    .col-md-12.ace_editor
-
-  .row
-    .form-group
-      .col-xs-12
-        = f.input :css, label: 'Stylesheet', as: :text, input_html: {rows: 12, class: 'form-control setting_css'}
+    .col-xs-12
+      #setting_css= @setting.css
   .row
     %hr
   .row
-    .form-group
-      .col-xs-12
-        = f.input :js, label: 'Javascript', as: :text, input_html: {rows: 12, class: 'form-control setting_js'}
+    .col-xs-12
+      #setting_js= @setting.js
   .row
     %hr
   .row
@@ -61,11 +56,11 @@
           = submit_tag 'Gem', :class => 'btn btn-primary'
   :javascript
 
-    //var csseditor = ace.edit("setting_css");
-    //var jseditor = ace.edit("setting_js");
+    var csseditor = ace.edit("setting_css");
+    var jseditor = ace.edit("setting_js");
 
-    //csseditor.setTheme("ace/theme/clouds");
-    //csseditor.setMode("ace/mode/stylesheet");
-    //jseditor.setTheme("ace/theme/monokai");
-    //jseditor.setSession().setMode("ace/mode/javascript");
+    csseditor.setTheme("ace/theme/clouds");
+    csseditor.setSession().setMode("ace/mode/stylesheet");
+    jseditor.setTheme("ace/theme/monokai");
+    jseditor.setSession().setMode("ace/mode/javascript");
 

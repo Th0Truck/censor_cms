@@ -7,9 +7,26 @@
           %li= msg
 
   .row
+    %hr
+  .row
     .form-group
       .col-md-8
-        = f.input :header, label: 'Overskrift', as: :string, input_html: {size: 40, class: 'form-control'}
+        %label.string.optional Baggrundsfarve
+        .input-group.color{data: {color: "##{@section.bgcolor}", 'color-format' => 'rgb'}}
+          = f.input :bgcolor, as: :string, label: false, input_html: {class: 'pick-a-color form-control'}
+          .add-on.input-group-addon
+            %i.fa.fa-square#picker1{style: "color: ##{@section.bgcolor}; font-size: 20px;"}
+  .row
+    .form-group
+      .col-md-8
+        %label.string.optional Tekstfarve
+        .input-group.color{data: {color: "##{@section.fontcolor}", 'color-format' => 'rgb'}}
+          = f.input :fontcolor, as: :string, label: false, input_html: {class: 'pick-a-color form-control'}
+          .add-on.input-group-addon
+            %i.fa.fa-square#picker2{style: "color: ##{@section.fontcolor}; font-size: 20px;"}
+
+  .row
+    %hr
   .row
     .form-group
       .col-md-8
@@ -42,3 +59,32 @@
       .col-md-4.btn-group
         = f.submit 'Gem', class: 'btn btn-primary'
         = link_to 'Tilbage', sections_path, class: 'btn btn-default'
+:javascript
+  $(function(){
+    $('#picker1').colpick({
+      layout:'hex',
+      submit:0,
+      color: $('#section_bgcolor').val(),
+      colorScheme:'light',
+      onChange:function(hsb,hex,rgb,el,bySetColor) {
+        $('#picker1').css('color','#'+hex);
+        // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+        if(!bySetColor) $('#section_bgcolor').val(hex);
+      }
+    }).keyup(function(){
+      $(this).colpickSetColor(this.value);
+    });
+    $('#picker2').colpick({
+      layout:'hex',
+      submit:0,
+      color: $('#section_fontcolor').val(),
+      colorScheme:'light',
+      onChange:function(hsb,hex,rgb,el,bySetColor) {
+        $('#picker2').css('color','#'+hex);
+        // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+        if(!bySetColor) $('#section_fontcolor').val(hex);
+      }
+    }).keyup(function(){
+      $(this).colpickSetColor(this.value);
+    });
+  });
