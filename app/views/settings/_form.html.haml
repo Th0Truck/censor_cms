@@ -39,28 +39,37 @@
   .row
     %hr
   .row
-    .col-xs-12
-      #setting_css= @setting.css
+    .col-xs-10
+      = hidden_field_tag 'setting[css]', @setting.css
+      #editor_css<
+        = preserve do
+          = @setting.css
   .row
     %hr
   .row
-    .col-xs-12
-      #setting_js= @setting.js
+    .col-xs-10
+      = hidden_field_tag 'setting[js]', @setting.js
+      #editor_js<
+        = preserve do
+          = @setting.js
   .row
     %hr
   .row
     .form-group
       .col-xs-12
         .btn-group
-          = link_to 'Annuller', root_path, class: 'btn btn-default'
           = submit_tag 'Gem', :class => 'btn btn-primary'
+          = link_to 'Annuller', root_path, class: 'btn btn-default'
+
   :javascript
+    var editors = {};
 
-    var csseditor = ace.edit("setting_css");
-    var jseditor = ace.edit("setting_js");
-
-    csseditor.setTheme("ace/theme/clouds");
-    csseditor.setSession().setMode("ace/mode/stylesheet");
-    jseditor.setTheme("ace/theme/monokai");
-    jseditor.setSession().setMode("ace/mode/javascript");
-
+    editors['css'] = ace.edit('editor_css');
+    editors['js'] = ace.edit('editor_js');
+    $(function(){
+      $('.edit_setting').on('submit',function(){
+        $('#setting_css').val(editors['css'].getSession().getValue());
+        $('#setting_js').val(editors['js'].getSession().getValue());
+        return true;
+      });
+    });

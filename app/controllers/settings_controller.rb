@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SettingsController < ApplicationController
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
 

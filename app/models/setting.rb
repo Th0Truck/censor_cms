@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Setting < ActiveRecord::Base
 
   has_many :user_settings
@@ -5,7 +6,7 @@ class Setting < ActiveRecord::Base
   has_many :sidebars
   has_many :users, :through => :user_settings
 
-  attr_accessible :domain, :name, :login, :footer, :info, :analytics_api, :facebook, :facebook_secret, :googleplus, :googleplus_secret, :linkedin, :linkedin_secret, :homepage, :css, :js
+  attr_accessible :domain, :name, :login, :footer, :info, :analytics_api, :facebook, :facebook_secret, :googleplus, :googleplus_secret, :linkedin, :linkedin_secret, :homepage, :css, :css_instance, :js, :js_instance
 
   def self.for_host(host)
     subdomain = host.split('.').first

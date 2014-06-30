@@ -21,12 +21,23 @@ blockquote:before {
 blockquote:after {
     content: close-quote;
 }
-.ace_editor {
-  position: absolute;
+#editor_css {
+  position: relative;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  height: 350px;
+  border: solid 1px #999;
+}
+#editor_js {
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 350px;
+  border: solid 1px #999;
 }
 .sort_class {
   padding: 5px;
@@ -40,4 +51,11 @@ blockquote:after {
 }
 .sort_control {
   cursor: pointer;
+}
+.spacer {
+  width: 100%;
+  display: block;
+}
+.spacer.large {
+  height: 45px;
 }
