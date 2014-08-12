@@ -24,3 +24,50 @@
 //
 // Example:
 // @linkColor: #ff0000;
+
+@import "bootstrap";
+
+blockquote:before {
+  content: open-quote;
+}
+blockquote:after {
+  content: close-quote;
+}
+#editor_css {
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 350px;
+  border: solid 1px #999;
+}
+#editor_js {
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 350px;
+  border: solid 1px #999;
+}
+.sort_class {
+  padding: 5px;
+  border-radius: 4px;
+}
+.sort_class:hover {
+  border: solid 1px #999;
+  background-color: #eee;
+  padding: 4px;
+  border-radius: 4px;
+}
+.sort_control {
+  cursor: pointer;
+}
+.spacer {
+  width: 100%;
+  display: block;
+}
+.spacer.large {
+  height: 45px;
+}
