@@ -17,9 +17,9 @@
 //= require bootstrap
 //= require ckeditor/override
 //= require ckeditor/init
-//#= require ace/ace
-//#= require ace/theme-monokai
-//#= require ace/theme-clouds
-//#= require ace/mode-javascript
-//#= require ace/mode-css
+//= require ace/ace
+//= require ace/theme-monokai
+//= require ace/theme-clouds
+//= require ace/mode-javascript
+//= require ace/mode-css
 //= require_tree .
