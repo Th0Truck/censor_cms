@@ -25,7 +25,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 
 #Bootstrap
-#gem 'bootstrap-sass','~> 3.1.1'
+gem 'bootstrap-sass','~> 3.1.1'
 gem 'twitter-bootstrap-turbo'
 #gem 'font-awesome-sass'
 
